@@ -17,6 +17,8 @@ public class LeagueInvaders {
 
 	public void setUp() {
 		frame.add(gamePanel);
+		frame.setVisible(true);
+		frame.addKeyListener(gamePanel);
 		frame.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		//frame.setVisible(true);
 		//frame.setSize(WIDTH, HEIGHT);
