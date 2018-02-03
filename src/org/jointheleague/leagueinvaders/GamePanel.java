@@ -11,19 +11,21 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
-
+	GameObject gameObject;
 	public void paintComponent(Graphics g) {
-		g.fillRect(10, 10, 100, 100);
+		gameObject.draw(g);
 	}
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
-
+		gameObject = new GameObject(10,10,10,10);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		// System.out.println("Hi console!");
 		repaint();
+		gameObject.update();
+		
 	}
 
 	public void startGame() {
