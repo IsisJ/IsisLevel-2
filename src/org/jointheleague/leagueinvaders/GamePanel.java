@@ -1,6 +1,7 @@
 package org.jointheleague.leagueinvaders;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,42 +17,53 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
-	// GameObject gameObject;
+	Font titleFont;
+	Font gameOverFont;
+	Font enterToStartFont;
+	Font spaceForInstructionFont;
+	
+	
+	
 
 	public void updateMenuState() {
 
 	}
 
 	public void updateGameState() {
-		
+
 	}
 
 	public void updateEndState() {
-		
+
 	}
 
 	public void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		g.setColor(Color.BLACK);
+		g.setFont(gameOverFont);
+		g.drawString("GAME OVER", 95, 400);
+	}
+	public void drawMenuState(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.BLACK);
+		g.drawString("League Invaders", 55, 100);
+		g.setFont(enterToStartFont);
+		g.drawString("Press ENTER to start", 50, 300);
+		g.setFont(spaceForInstructionFont);
+		g.drawString("Press SPACE for instructions", 50, 400);
+	}
+
+	public void drawGameState(Graphics g) {
+		g.setColor(Color.BLACK);
 
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 	}
 	
-	public void drawMenuState (Graphics g) {
-		g.setColor(Color.BLUE);
-
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-
-	}
-
-	public void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK
-				);
-
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-	}
-
+	
 	public void paintComponent(Graphics g) {
-		// gameObject.draw(g);
 		if (currentState == MENU_STATE) {
 			drawMenuState(g);
 		} else if (currentState == GAME_STATE) {
@@ -63,7 +75,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
-		// gameObject = new GameObject(10,10,10,10);
+		titleFont = new Font("Arial", Font.PLAIN, 48);
+		gameOverFont = new Font("Arial", Font.PLAIN, 48);
+		enterToStartFont = new Font("Arial", Font.PLAIN, 20);
+		spaceForInstructionFont = new Font("Arial", Font.PLAIN, 20);
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -77,7 +93,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		}
 		repaint();
-		// gameObject.update();
 
 	}
 
@@ -93,11 +108,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("Console! A key was pressed!");
-		if(currentState == MENU_STATE ) {
-			currentState = GAME_STATE;
-		}
-		else if (currentState > END_STATE) {
-			currentState = MENU_STATE;
+		if(e.getKeyCode() == 10 ) {
+		//System.out.println(e.getKeyCode());
+		//enter key code is 10
+			if(currentState == MENU_STATE ) {
+				currentState = GAME_STATE;
+			}
+	
+			else if(currentState < END_STATE) {
+				currentState = END_STATE;
+			}
+			else if (currentState > GAME_STATE) {
+				currentState = MENU_STATE;
+			}
 		}
 		
 		
