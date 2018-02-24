@@ -21,8 +21,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font gameOverFont;
 	Font enterToStartFont;
 	Font spaceForInstructionFont;
-	
-	
+	Font numEnemiesKilled;
+	Font enterToRestart;
+	RocketShip rocket = new RocketShip(250,700,50,50); 
 	
 
 	public void updateMenuState() {
@@ -31,6 +32,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 
+		rocket.update();
+		
 	}
 
 	public void updateEndState() {
@@ -42,7 +45,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		g.setColor(Color.BLACK);
 		g.setFont(gameOverFont);
-		g.drawString("GAME OVER", 95, 400);
+		g.drawString("GAME OVER", 100, 100); 
+		g.setFont(numEnemiesKilled);
+		g.drawString("You killed (add in number later) enemies", 50, 300);
+		g.setFont(enterToRestart);
+		g.drawString("Press ENTER to restart", 100, 400);
 	}
 	public void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
@@ -57,9 +64,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void drawGameState(Graphics g) {
+		
 		g.setColor(Color.BLACK);
-
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		rocket.draw(g);
 	}
 	
 	
@@ -79,7 +87,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		gameOverFont = new Font("Arial", Font.PLAIN, 48);
 		enterToStartFont = new Font("Arial", Font.PLAIN, 20);
 		spaceForInstructionFont = new Font("Arial", Font.PLAIN, 20);
-		
+		numEnemiesKilled = new Font ("Arial", Font.PLAIN, 20);
+		enterToRestart = new Font ("Arial", Font.PLAIN, 20);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -95,6 +104,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		repaint();
 
 	}
+	
+	
 
 	public void startGame() {
 		timer.start();
@@ -103,6 +114,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		System.out.println("Console! A key was typed!!!");
+	}
+	
+	public void moveRocketShip(KeyEvent e) {
+		if(e.getKeyCode() == 37) {
+			rocket.moveRocketLeft();
+		}
+		else if(e.getKeyCode() == 38) {
+			rocket.moveRocketUp();
+		}
+		else if(e.getKeyCode() == 39) {
+			rocket.moveRocketRight();
+		}
+		else if (e.getKeyCode() == 40) {
+			rocket.moveRocketDown();
+
+		}
 	}
 
 	@Override
@@ -122,13 +149,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				currentState = MENU_STATE;
 			}
 		}
-		
-		
+		moveRocketShip(e);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("Console! A key was Released!!");
+		rocket.stopRocketFromMoving();
 	}
 
 }
