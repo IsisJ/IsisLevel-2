@@ -34,6 +34,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateGameState() {
 
 		manager.update();
+		manager.manageEnemies();
+		manager.checkCollision();
+		manager.purgeObjects();
+		if(!rocket.isAlive) {
+			currentState = END_STATE;
+		}
 		
 		
 	}
@@ -49,9 +55,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(gameOverFont);
 		g.drawString("GAME OVER", 100, 100); 
 		g.setFont(numEnemiesKilled);
-		g.drawString("You killed (add in number later) enemies", 50, 300);
+		g.drawString("You killed "+ manager.getScore()+" enemies", 150, 300);
 		g.setFont(enterToRestart);
-		g.drawString("Press ENTER to restart", 100, 400);
+		g.drawString("Press ENTER to restart", 150, 400);
 	}
 	public void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
@@ -154,7 +160,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		moveRocketShip(e);
 		if(e.getKeyCode() == 32) {
-			manager.addProjectile(new Projectile(rocket.x, rocket.y, 10, 10));
+			manager.addProjectile(new Projectile(rocket.x+rocket.width/2-5, rocket.y, 10, 10));
 			}
 	}
 
