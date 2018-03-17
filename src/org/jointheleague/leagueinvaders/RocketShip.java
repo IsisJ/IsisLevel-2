@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 public class RocketShip extends GameObject {
 	Integer speed;
 	Integer ySpeed;
+	RocketShip drawRocket;
 
 	public RocketShip(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -17,12 +18,13 @@ public class RocketShip extends GameObject {
 
 	public void update() {
         super.update();
-			x = x + speed;
-			y = y + ySpeed;
+		x = x + speed;
+		y = y + ySpeed;
 		
 
 	}
 
+	
 	public void moveRocketLeft() {
 		speed = - 5;
 
@@ -49,9 +51,14 @@ public class RocketShip extends GameObject {
 
 	public void draw(Graphics g) {
 
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
-
+		//g.setColor(Color.BLUE);
+		//g.fillRect(x, y, width, height);
+		  g.drawImage(GamePanel.rocket, x, y, width, height, null);
+		 // g.drawImage(GamePanel.space, x, y, width, height, null);
+	}
+	
+	public void drawTheLoop(Graphics g) {
+		  g.drawImage(GamePanel.rocket, 0, y, width, height, null);
 	}
 
 }

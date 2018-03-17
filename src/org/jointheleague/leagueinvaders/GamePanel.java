@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -23,8 +26,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font spaceForInstructionFont;
 	Font numEnemiesKilled;
 	Font enterToRestart;
-	RocketShip rocket = new RocketShip(250,700,50,50); 
-	ObjectManager manager = new ObjectManager(rocket);
+	static RocketShip rocket1 = new RocketShip(250,700,50,50); 
+	ObjectManager manager = new ObjectManager(rocket1);
+	public static BufferedImage alien;
+    public static BufferedImage rocket;
+    public static BufferedImage bullet;
+    public static BufferedImage space;
+
+
+
 	
 
 	public void updateMenuState() {
@@ -37,7 +47,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.manageEnemies();
 		manager.checkCollision();
 		manager.purgeObjects();
-		if(!rocket.isAlive) {
+		if(!rocket1.isAlive) {
 			currentState = END_STATE;
 		}
 		
@@ -73,9 +83,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void drawGameState(Graphics g) {
 		
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		//g.setColor(Color.BLACK);
+		//g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		System.out.println(WIDTH );
+		System.out.println(HEIGHT);
+		g.drawImage(GamePanel.space, 0, 0,LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
 		manager.draw(g);
+		
+
 		
 	}
 	
@@ -98,6 +113,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		spaceForInstructionFont = new Font("Arial", Font.PLAIN, 20);
 		numEnemiesKilled = new Font ("Arial", Font.PLAIN, 20);
 		enterToRestart = new Font ("Arial", Font.PLAIN, 20);
+		  try {
+              alien = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+              rocket = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+              bullet = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+              space = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+      } catch (IOException e) {
+
+              // TODO Auto-generated catch block
+
+              e.printStackTrace();
+
+      }
+
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -127,16 +156,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	public void moveRocketShip(KeyEvent e) {
 		if(e.getKeyCode() == 37) {
-			rocket.moveRocketLeft();
+			rocket1.moveRocketLeft();
 		}
 		else if(e.getKeyCode() == 38) {
-			rocket.moveRocketUp();
+			rocket1.moveRocketUp();
 		}
 		else if(e.getKeyCode() == 39) {
-			rocket.moveRocketRight();
+			rocket1.moveRocketRight();
 		}
 		else if (e.getKeyCode() == 40) {
-			rocket.moveRocketDown();
+			rocket1.moveRocketDown();
 
 		}
 	}
@@ -150,9 +179,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if(currentState == MENU_STATE ) {
 				currentState = GAME_STATE;
 			}
+
 	
-			else if(currentState < END_STATE) {
-				currentState = END_STATE;
+			else if(currentState == END_STATE) {
+				currentState = MENU_STATE;
+				rocket1 = new RocketShip(250,700,50,50);
+				manager = new ObjectManager(rocket1);
 			}
 			else if (currentState > GAME_STATE) {
 				currentState = MENU_STATE;
@@ -160,14 +192,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		moveRocketShip(e);
 		if(e.getKeyCode() == 32) {
-			manager.addProjectile(new Projectile(rocket.x+rocket.width/2-5, rocket.y, 10, 10));
+			manager.addProjectile(new Projectile(rocket1.x+rocket1.width/2-5, rocket1.y, 10, 10));
 			}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("Console! A key was Released!!");
-		rocket.stopRocketFromMoving();
+		rocket1.stopRocketFromMoving();
 	}
 
 }

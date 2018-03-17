@@ -10,7 +10,7 @@ public class ObjectManager {
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	long enemyTimer = 0;
-	int enemySpawnTime;
+	int enemySpawnTime = 500 ;
 	int score = 0;
 
 	public ObjectManager(RocketShip rocketShip) {
