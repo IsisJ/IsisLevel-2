@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	int storyState = 1;
 	int mapState = 2;
 	int currentState = storyState;
+	StoryPiece storyPiece = new StoryPiece();
 
 	Timer timer = new Timer(1000, new ActionListener() {
 
@@ -50,12 +51,18 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(mapButton);
 		mapButton.setText("Map");
 		mapButton.addActionListener(this);
-		timer.start();		
+		timer.start();	
+		//Story Piece Test
+		storyPiece.setToDangerSymbol();
+		this.add(storyPiece.getSymbol());
+		storyPiece.setToMemorySymbol();
+		this.add(storyPiece.getSymbol());
+		storyPiece.setToAlreadyBeenThereSymbol();
+		this.add(storyPiece.getSymbol());
+		//End of Piece Test
 	}
 
-	public void Map() {
 
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -81,6 +88,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		deathCount.setVisible(false);
 		scroll.setVisible(false);
 		this.add(map);
+		
 		
 	}
 
