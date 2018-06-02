@@ -29,16 +29,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	int storyState = 1;
 	int mapState = 2;
 	int currentState = storyState;
-	StoryPiece storyPiece = new StoryPiece();
+	StoryPiece storyPiece = new StoryPiece(false, "Hey");
 
-	Timer timer = new Timer(1000, new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.println(currentState);
-		}
-
-	});
 
 	public void GamePage() {
 		// panel= new GridLayout(3,1);
@@ -50,8 +42,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		scroll.setBorder(null);
 		this.add(mapButton);
 		mapButton.setText("Map");
-		mapButton.addActionListener(this);
-		timer.start();	
+		mapButton.addActionListener(this);	
 		//Story Piece Test
 		storyPiece.setToDangerSymbol();
 		this.add(storyPiece.getSymbol());
@@ -60,6 +51,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		storyPiece.setToAlreadyBeenThereSymbol();
 		this.add(storyPiece.getSymbol());
 		//End of Piece Test
+		//isDead Test
+		System.out.println(storyPiece.isDead());
+		System.out.println(storyPiece.isDead());
+		System.out.println(storyPiece.isDead());
+		//End of isDead
+
 	}
 
 

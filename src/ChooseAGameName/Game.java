@@ -6,10 +6,12 @@ import javax.swing.JFrame;
 
 public class Game {
 	
+	GamePanel panel = new GamePanel();
+
+	
 	public void CreateGameUI(){
 
 		JFrame frame = new JFrame();
-		GamePanel panel = new GamePanel();
 		frame.add(panel);
 		panel.GamePage();
 		panel.setBackground(Color.white);
