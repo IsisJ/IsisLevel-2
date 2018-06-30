@@ -9,37 +9,43 @@ import javax.swing.JPanel;
 
 import org.jointheleague.leagueinvaders.GamePanel;
 
-public class StoryPiece   {
+public class StoryPiece {
 
 	private boolean isOccupied;
 	private String dangerSymbol = "x";
 	private String memorySymbol = "o";
 	private String alreadyBeenThereSymbol = "-";
+	private String occupiedSymbol = "^";
 	private JComponent symbol;
 	private String story;
 	private boolean isDanger;
 	private boolean hasBeenThere;
-	
-	Game gamePanel = new Game();
 
-	public StoryPiece(boolean isDanger, String story) { 
+	public StoryPiece(boolean isDanger, String story) {
 		this.isDanger = isDanger;
 		hasBeenThere = false;
 		this.story = story;
-		//make sure that at some point that you show the story in the JTextArea of the game page (maybe the manager)
-		if(isDanger) {
+		// make sure that at some point that you show the story in the JTextArea
+		// of the game page (maybe the manager)
+		if (isDanger) {
 			setToDangerSymbol();
-		}else {
+		} else {
 			setToMemorySymbol();
 		}
 	}
 
+	public void visit(){
+		isOccupied = true;
+		symbol = new JLabel(occupiedSymbol);
+	}
+	
+	public void leaving(){
+		isOccupied = false;
+		symbol = new JLabel(alreadyBeenThereSymbol);
+	}
+	
 	public boolean getOccupied() {
 		return isOccupied;
-	}
-
-	public void setOccupied(boolean isOccupied) {
-		this.isOccupied = isOccupied;
 	}
 
 	public JComponent getSymbol() {
@@ -63,13 +69,18 @@ public class StoryPiece   {
 	}
 
 	public boolean isDead() {
-		int deathRoll = new Random().nextInt(5) + 1;
-		if (deathRoll <= 3) {
+		if (!isDanger) {
 			return false;
-		} else {
-			return true;
-			//add the background?
 		}
+		if (hasBeenThere) {
+			return false;
+		}
+		int deathRoll = new Random().nextInt(5) + 1;
+		if (isDanger) {
+			if (deathRoll <= 3) {
+				return false;
+			}
+		}
+		return true;
 	}
-
 }
