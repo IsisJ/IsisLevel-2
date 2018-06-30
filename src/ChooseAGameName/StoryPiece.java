@@ -28,9 +28,9 @@ public class StoryPiece {
 		// make sure that at some point that you show the story in the JTextArea
 		// of the game page (maybe the manager)
 		if (isDanger) {
-			setToDangerSymbol();
+			symbol = new JLabel(dangerSymbol);
 		} else {
-			setToMemorySymbol();
+			symbol = new JLabel(memorySymbol);
 		}
 	}
 
@@ -42,6 +42,7 @@ public class StoryPiece {
 	public void leaving(){
 		isOccupied = false;
 		symbol = new JLabel(alreadyBeenThereSymbol);
+		hasBeenThere = true;
 	}
 	
 	public boolean getOccupied() {
@@ -51,21 +52,6 @@ public class StoryPiece {
 	public JComponent getSymbol() {
 
 		return symbol;
-	}
-
-	public void setToDangerSymbol() {
-
-		symbol = new JLabel(dangerSymbol);
-	}
-
-	public void setToMemorySymbol() {
-
-		symbol = new JLabel(memorySymbol);
-	}
-
-	public void setToAlreadyBeenThereSymbol() {
-
-		symbol = new JLabel(alreadyBeenThereSymbol);
 	}
 
 	public boolean isDead() {

@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	int mapState = 2;
 	int currentState = storyState;
 	StoryPiece storyPiece = new StoryPiece(false, "Hey");
+	StoryPiece storyPiece2 = new StoryPiece(true, "Heyy");
 
 
 	public void GamePage() {
@@ -44,17 +45,13 @@ public class GamePanel extends JPanel implements ActionListener {
 		mapButton.setText("Map");
 		mapButton.addActionListener(this);	
 		//Story Piece Test
-		storyPiece.setToDangerSymbol();
 		this.add(storyPiece.getSymbol());
-		storyPiece.setToMemorySymbol();
-		this.add(storyPiece.getSymbol());
-		storyPiece.setToAlreadyBeenThereSymbol();
-		this.add(storyPiece.getSymbol());
+		this.add(storyPiece2.getSymbol());
 		//End of Piece Test
 		//isDead Test
 		System.out.println(storyPiece.isDead());
-		System.out.println(storyPiece.isDead());
-		System.out.println(storyPiece.isDead());
+		System.out.println(storyPiece2.isDead());
+		
 		//End of isDead
 
 	}
