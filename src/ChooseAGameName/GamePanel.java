@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	int currentState = storyState;
 	StoryPiece storyPiece = new StoryPiece(false, "Hey");
 	StoryPiece storyPiece2 = new StoryPiece(true, "Heyy");
+	MapManager mapManager = new MapManager();
 
 
 	public void GamePage() {
@@ -51,14 +52,19 @@ public class GamePanel extends JPanel implements ActionListener {
 		//isDead Test
 		System.out.println(storyPiece.isDead());
 		System.out.println(storyPiece2.isDead());
-		
 		//End of isDead
+		StoryPiece[][] grid = mapManager.getMap();
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid.length; j++) {
+				this.add(grid[i][j].getSymbol());
+			}
+		}
 
 	}
 
 
 
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == mapButton) {
@@ -80,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		storyArea.setVisible(false);
 		deathCount.setVisible(false);
-		scroll.setVisible(false);
+		scroll.setVisible(false);		
 		this.add(map);
 		
 		
