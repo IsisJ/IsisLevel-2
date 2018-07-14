@@ -1,6 +1,7 @@
 package ChooseAGameName;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	StoryPiece storyPiece = new StoryPiece(false, "Hey");
 	StoryPiece storyPiece2 = new StoryPiece(true, "Heyy");
 	MapManager mapManager = new MapManager();
+	JPanel mapPanel = new JPanel();
+	
 
 
 	public void GamePage() {
@@ -45,30 +48,37 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(mapButton);
 		mapButton.setText("Map");
 		mapButton.addActionListener(this);	
-		//Story Piece Test
+		/*
+		Story Piece Test
 		this.add(storyPiece.getSymbol());
 		this.add(storyPiece2.getSymbol());
-		//End of Piece Test
-		//isDead Test
+		End of Piece Test
+		isDead Test
 		System.out.println(storyPiece.isDead());
 		System.out.println(storyPiece2.isDead());
-		//End of isDead
+		End of isDead
+		*/
+		this.add(mapPanel);
+		mapPanel.setVisible(false);
+		mapPanel.setPreferredSize(new Dimension (300,300));
+	}
+	
+	public void mapPage() {
+		
+		
 		StoryPiece[][] grid = mapManager.getMap();
+		mapPanel.setLayout(new GridLayout(grid.length,grid.length));
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {
-				this.add(grid[i][j].getSymbol());
+				mapPanel.add(grid[i][j].getSymbol());
 			}
 		}
-
 	}
-
-
-
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == mapButton) {
-			// this.ShowMap();
 			if (currentState == mapState) {
 				this.HideMap();
 				this.ShowStory();
@@ -83,13 +93,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 
 	public void ShowMap() {
-
 		storyArea.setVisible(false);
 		deathCount.setVisible(false);
-		scroll.setVisible(false);		
+		scroll.setVisible(false);
 		this.add(map);
-		
-		
+		this.mapPage();
+		mapPanel.setVisible(true);
 	}
 
 	public void ShowStory() {
@@ -99,7 +108,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 
 	public void HideMap() {
+		this.setBackground(Color.WHITE);
 		map.setVisible(false);
+		mapPanel.setVisible(false);
 	}
 
 	public void HideStory() {
