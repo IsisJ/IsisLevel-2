@@ -25,8 +25,6 @@ public class StoryPiece {
 		this.isDanger = isDanger;
 		hasBeenThere = false;
 		this.story = story;
-		// make sure that at some point that you show the story in the JTextArea
-		// of the game page (maybe the manager)
 		if (isDanger) {
 			symbol = new JLabel(dangerSymbol);
 		} else {
