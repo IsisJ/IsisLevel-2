@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -34,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	StoryPiece storyPiece2 = new StoryPiece(true, "Heyy");
 	MapManager mapManager = new MapManager();
 	JPanel mapPanel = new JPanel();
-	
+	JPanel compassPanel = new JPanel();
 
 
 	public void GamePage() {
@@ -61,11 +62,14 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(mapPanel);
 		mapPanel.setVisible(false);
 		mapPanel.setPreferredSize(new Dimension (300,300));
+		this.add(compassPanel);
+		compassPanel.setVisible(false);
+		compassPanel.setPreferredSize(new Dimension (100,100));
+		
+
 	}
 	
-	public void mapPage() {
-		
-		
+	public void mapPage() {	
 		StoryPiece[][] grid = mapManager.getMap();
 		mapPanel.setLayout(new GridLayout(grid.length,grid.length));
 		for (int i = 0; i < grid.length; i++) {
@@ -73,6 +77,26 @@ public class GamePanel extends JPanel implements ActionListener {
 				mapPanel.add(grid[i][j].getSymbol());
 			}
 		}
+
+	}
+	
+	public void compassPage(){
+		JLabel empty = new JLabel("  ");
+		JLabel empty2 = new JLabel("  ");
+		JLabel empty3 = new JLabel("  ");
+		JLabel empty4 = new JLabel("  ");
+
+		compassPanel.setLayout(new GridLayout(3,3));
+		compassPanel.add(new JPanel());
+		compassPanel.add(mapManager.northButton);
+		compassPanel.add(empty);
+		compassPanel.add(mapManager.westButton);
+		compassPanel.add(empty2);
+		compassPanel.add(mapManager.eastButton);
+		compassPanel.add(empty3);
+		compassPanel.add(mapManager.southButton);
+		compassPanel.add(empty4);
+		
 	}
 	
 	
@@ -99,6 +123,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(map);
 		this.mapPage();
 		mapPanel.setVisible(true);
+		mapManager.eastButton.setVisible(true);
+		mapManager.northButton.setVisible(true);
+		mapManager.southButton.setVisible(true);
+		mapManager.westButton.setVisible(true);
+		compassPanel.setVisible(true);
+		this.compassPage();
 	}
 
 	public void ShowStory() {
@@ -111,6 +141,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.setBackground(Color.WHITE);
 		map.setVisible(false);
 		mapPanel.setVisible(false);
+		mapManager.eastButton.setVisible(false);
+		mapManager.northButton.setVisible(false);
+		mapManager.southButton.setVisible(false);
+		mapManager.westButton.setVisible(false);
+		compassPanel.setVisible(false);
 	}
 
 	public void HideStory() {

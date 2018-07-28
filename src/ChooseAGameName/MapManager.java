@@ -1,10 +1,17 @@
 package ChooseAGameName;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 
 public class MapManager {
 
 	  StoryPiece[][] mapGrid= new StoryPiece[4][4];
+	  
+	  JButton northButton = new JButton("N");
+	  JButton eastButton = new JButton("E");
+	  JButton southButton = new JButton("S");
+	  JButton westButton = new JButton("W");
+	  
 	
 	public  MapManager (){
 		
@@ -31,5 +38,7 @@ public class MapManager {
 		return mapGrid;
 		
 	}
+	
+	
 	
 }
