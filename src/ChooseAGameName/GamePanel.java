@@ -103,6 +103,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
+		mapManager.handleButton(buttonPressed);
 		if (buttonPressed == mapButton) {
 			if (currentState == mapState) {
 				this.hideMap();
@@ -115,6 +116,7 @@ public class GamePanel extends JPanel implements ActionListener {
 				currentState=mapState;
 			}
 		}
+		
 	}
 
 	public void ShowMap() {
