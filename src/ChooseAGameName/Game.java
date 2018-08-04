@@ -15,7 +15,7 @@ public class Game {
 		JFrame frame = new JFrame();
 		frame.add(panel);
 		//frame.add(mapPanel);
-		panel.GamePage();
+		panel.gamePage();
 		//mapPanel.mapPage();
 		panel.setBackground(Color.white);
 		frame.setSize(500, 500);
