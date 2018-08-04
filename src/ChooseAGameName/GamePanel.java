@@ -38,8 +38,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	JPanel compassPanel = new JPanel();
 
 
-	public void GamePage() {
-		// panel= new GridLayout(3,1);
+	public void gamePage() {
 		storyArea.setEditable(false);
 		this.add(scroll);
 		this.add(deathCount);
@@ -65,7 +64,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(compassPanel);
 		compassPanel.setVisible(false);
 		compassPanel.setPreferredSize(new Dimension (100,100));
-		
+		this.add(map).setVisible(false);
+		this.compassPage();
+		this.mapPage();
 
 	}
 	
@@ -104,12 +105,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == mapButton) {
 			if (currentState == mapState) {
-				this.HideMap();
+				this.hideMap();
 				this.ShowStory();
 				currentState = storyState;
 			}
 			else if (currentState == storyState) {
-				this.HideStory();
+				this.hideStory();
 				this.ShowMap();
 				currentState=mapState;
 			}
@@ -120,16 +121,15 @@ public class GamePanel extends JPanel implements ActionListener {
 		storyArea.setVisible(false);
 		deathCount.setVisible(false);
 		scroll.setVisible(false);
-		this.add(map);
-		this.mapPage();
+		map.setVisible(true);
 		mapPanel.setVisible(true);
 		mapManager.eastButton.setVisible(true);
 		mapManager.northButton.setVisible(true);
 		mapManager.southButton.setVisible(true);
 		mapManager.westButton.setVisible(true);
 		compassPanel.setVisible(true);
-		this.compassPage();
 	}
+
 
 	public void ShowStory() {
 		storyArea.setVisible(true);
@@ -137,7 +137,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		scroll.setVisible(true);
 	}
 
-	public void HideMap() {
+	public void hideMap() {
 		this.setBackground(Color.WHITE);
 		map.setVisible(false);
 		mapPanel.setVisible(false);
@@ -148,7 +148,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		compassPanel.setVisible(false);
 	}
 
-	public void HideStory() {
+	public void hideStory() {
 		storyArea.setVisible(false);
 		deathCount.setVisible(false);
 		scroll.setVisible(false);
