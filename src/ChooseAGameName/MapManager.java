@@ -1,9 +1,12 @@
 package ChooseAGameName;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
 
-public class MapManager {
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+
+public class MapManager implements ActionListener {
 
 	  StoryPiece[][] mapGrid= new StoryPiece[4][4];
 	  
@@ -35,6 +38,8 @@ public class MapManager {
 		mapGrid[3][2] = new StoryPiece(false,"hi");
 		mapGrid[3][3] = new StoryPiece(false,"hi");
 		mapGrid[column][row].visit();
+		
+		this.addCompassActionListeners();
 
 	}
 	
@@ -43,19 +48,30 @@ public class MapManager {
 		
 	}
 	
-	public void handleButton(JButton buttonPressed) {
+	public void addCompassActionListeners() {
+		northButton.addActionListener(this);
+		southButton.addActionListener(this);
+		eastButton.addActionListener(this);
+		westButton.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == northButton) {
 			moveNorth();
 			System.out.println("i moved north");
 		}
 		if (buttonPressed == eastButton) {
 			moveEast();
+			System.out.println("i moved east");
 		}
 		if (buttonPressed == southButton) {
 			moveSouth();
+			System.out.println("i moved south");
 		}
 		if (buttonPressed == westButton) {
 			moveWest();
+			System.out.println("i moved west");
 		}
 		
 	}
@@ -75,6 +91,8 @@ public class MapManager {
 	public void moveWest() {
 		mapGrid[column] [row = row - 1].visit();
 	}
+
+	
 	
 }
 	
