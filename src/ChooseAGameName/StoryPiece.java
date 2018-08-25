@@ -60,10 +60,8 @@ public class StoryPiece {
 			return false;
 		}
 		int deathRoll = new Random().nextInt(5) + 1;
-		if (isDanger) {
-			if (deathRoll <= 3) {
-				return false;
-			}
+		if (isDanger && deathRoll <= 3) {
+			return false;
 		}
 		return true;
 	}

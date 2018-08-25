@@ -9,14 +9,15 @@ import java.awt.event.ActionEvent;
 public class MapManager implements ActionListener {
 
 	  StoryPiece[][] mapGrid= new StoryPiece[4][4];
+	  //StoryPiece storyPiece = new StoryPiece;
 	  
 	  JButton northButton = new JButton("N");
 	  JButton eastButton = new JButton("E");
 	  JButton southButton = new JButton("S");
 	  JButton westButton = new JButton("W");
 	  
-	  int column = 2;
-	  int row = 2;
+	   int column = 2;
+	   int row = 2;
 	  
 	
 	public  MapManager (){
@@ -48,7 +49,7 @@ public class MapManager implements ActionListener {
 		
 	}
 	
-	public void addCompassActionListeners() {
+	private void addCompassActionListeners() {
 		northButton.addActionListener(this);
 		southButton.addActionListener(this);
 		eastButton.addActionListener(this);
@@ -59,7 +60,6 @@ public class MapManager implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == northButton) {
 			moveNorth();
-			System.out.println("i moved north");
 		}
 		if (buttonPressed == eastButton) {
 			moveEast();
@@ -76,22 +76,29 @@ public class MapManager implements ActionListener {
 		
 	}
 	
-	public void moveNorth() {
-		mapGrid[column = column + 1] [row].visit();
+	private void moveNorth() {
+		mapGrid[column] [row].leaving();
+		column = column - 1;
+		mapGrid[column] [row].visit();
+		System.out.println("i moved north");
 	}
 	
-	public void moveEast() {
+	private void moveEast() {
+		mapGrid[column] [row].leaving();
 		mapGrid[column] [row = row +1].visit();
 	}
 	
-	public void moveSouth() {
-		mapGrid[column = column - 1] [row].visit();
+	private void moveSouth() {
+		mapGrid[column] [row].leaving();
+		mapGrid[column = column + 1] [row].visit();
 	}
 	
-	public void moveWest() {
+	private void moveWest() {
+		mapGrid[column] [row].leaving();
 		mapGrid[column] [row = row - 1].visit();
 	}
 
+	
 	
 	
 }

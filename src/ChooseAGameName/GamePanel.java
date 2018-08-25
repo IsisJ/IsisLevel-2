@@ -2,23 +2,17 @@ package ChooseAGameName;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener {
-
-	// graphics and layout for each page ( game page, and map); maybe handle mouse
-	// clicks(for map)
 
 	// JTextArea storyArea = new JTextArea("hey", 1, 1);
 	JTextArea storyArea = new JTextArea(
@@ -78,7 +72,6 @@ public class GamePanel extends JPanel implements ActionListener {
 				mapPanel.add(grid[i][j].getSymbol());
 			}
 		}
-
 	}
 	
 	public void compassPage(){
@@ -104,8 +97,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
 		System.out.println(buttonPressed);
-		//mapManager.actionPerformed(buttonPressed);
-		if (buttonPressed == mapButton) {
+			if (buttonPressed == mapButton) {
 			if (currentState == mapState) {
 				this.hideMap();
 				this.ShowStory();
