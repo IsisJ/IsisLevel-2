@@ -17,7 +17,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	// JTextArea storyArea = new JTextArea("hey", 1, 1);
 	JTextArea storyArea = new JTextArea(
 			">Hello, how are you doing today?!\n\n\n\n\n\n\n\nsome text\n\n\n\n\n\n\n\n even more text", 20, 30);
-	JLabel deathCount = new JLabel("Deaths: put num later");
+	StoryPiece storyPiece = new StoryPiece(false, "hey");
+	JLabel deathCount = new JLabel("Deaths: "+storyPiece.deathCount());
 	JScrollPane scroll = new JScrollPane(storyArea);
 	JButton mapButton = new JButton();
 	JLabel map = new JLabel("You're in the map");
@@ -25,10 +26,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	int storyState = 1;
 	int mapState = 2;
 	int currentState = storyState;
-	StoryPiece storyPiece = new StoryPiece(false, "Hey");
-	StoryPiece storyPiece2 = new StoryPiece(true, "Heyy");
-	MapManager mapManager = new MapManager();
+	//StoryPiece storyPiece = new StoryPiece(false, "Hey");
 	JPanel mapPanel = new JPanel();
+	MapManager mapManager = new MapManager(mapPanel);
 	JPanel compassPanel = new JPanel();
 
 
@@ -48,6 +48,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(storyPiece2.getSymbol());
 		End of Piece Test
 		isDead Test
+		*/
+		/*
 		System.out.println(storyPiece.isDead());
 		System.out.println(storyPiece2.isDead());
 		End of isDead
@@ -60,19 +62,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		compassPanel.setPreferredSize(new Dimension (100,100));
 		this.add(map).setVisible(false);
 		this.compassPage();
-		this.mapPage();
+		this.mapManager.drawMap();
 
 	}
 	
-	public void mapPage() {	
-		StoryPiece[][] grid = mapManager.getMap();
-		mapPanel.setLayout(new GridLayout(grid.length,grid.length));
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid.length; j++) {
-				mapPanel.add(grid[i][j].getSymbol());
-			}
-		}
-	}
+	
 	
 	public void compassPage(){
 		JLabel empty = new JLabel("  ");

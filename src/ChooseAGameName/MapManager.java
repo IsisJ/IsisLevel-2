@@ -4,6 +4,10 @@ package ChooseAGameName;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 public class MapManager implements ActionListener {
@@ -15,13 +19,14 @@ public class MapManager implements ActionListener {
 	  JButton eastButton = new JButton("E");
 	  JButton southButton = new JButton("S");
 	  JButton westButton = new JButton("W");
+	  JPanel mapPanel;
 	  
 	   int column = 2;
 	   int row = 2;
 	  
 	
-	public  MapManager (){
-		
+	public  MapManager (JPanel mapPanel){
+		this.mapPanel = mapPanel;
 		mapGrid[0][0] = new StoryPiece(true,"hi");
 		mapGrid[0][1] = new StoryPiece(false,"hi");
 		mapGrid[0][2] = new StoryPiece(false,"hi");
@@ -41,7 +46,22 @@ public class MapManager implements ActionListener {
 		mapGrid[column][row].visit();
 		
 		this.addCompassActionListeners();
-
+		
+	}
+	
+	public void drawMap() {	
+		StoryPiece[][] grid = getMap();
+		mapPanel.removeAll();
+		mapPanel.setLayout(new GridLayout(grid.length,grid.length));
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid.length; j++) {
+				mapPanel.add(grid[i][j].getSymbol());
+				JLabel label = (JLabel)grid[i][j].getSymbol();
+				System.out.print(label.getText());
+			}
+		}
+		mapPanel.revalidate();
+		
 	}
 	
 	public   StoryPiece[][] getMap(){
@@ -56,22 +76,24 @@ public class MapManager implements ActionListener {
 		westButton.addActionListener(this);
 	}
 	
+	
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == northButton) {
 			moveNorth();
+			drawMap();
 		}
 		if (buttonPressed == eastButton) {
 			moveEast();
-			System.out.println("i moved east");
+			drawMap();
 		}
 		if (buttonPressed == southButton) {
 			moveSouth();
-			System.out.println("i moved south");
+			drawMap();
 		}
 		if (buttonPressed == westButton) {
 			moveWest();
-			System.out.println("i moved west");
+			drawMap();
 		}
 		
 	}
@@ -86,18 +108,23 @@ public class MapManager implements ActionListener {
 	private void moveEast() {
 		mapGrid[column] [row].leaving();
 		mapGrid[column] [row = row +1].visit();
+		System.out.println("i moved east");
 	}
 	
 	private void moveSouth() {
 		mapGrid[column] [row].leaving();
 		mapGrid[column = column + 1] [row].visit();
+		System.out.println("i moved south");
 	}
 	
 	private void moveWest() {
 		mapGrid[column] [row].leaving();
 		mapGrid[column] [row = row - 1].visit();
+		System.out.println("i moved west");
+
 	}
 
+	
 	
 	
 	
