@@ -27,9 +27,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	int mapState = 2;
 	int currentState = storyState;
 	JPanel mapPanel = new JPanel();
-	MapManager mapManager = new MapManager(mapPanel);
+	MapManager mapManager;
 	JPanel compassPanel = new JPanel();
 
+	public GamePanel () {
+		this.mapManager = new MapManager(mapPanel, this);
+	}
 
 	public void gamePage() {
 		storyArea.setEditable(false);

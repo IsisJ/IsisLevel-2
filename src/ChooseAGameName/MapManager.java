@@ -20,13 +20,14 @@ public class MapManager  implements ActionListener  {
 	  JButton southButton = new JButton("S");
 	  JButton westButton = new JButton("W");
 	  JPanel mapPanel;
-	  
+	  GamePanel gamePanel;
 	   int column = 2;
 	   int row = 2;
 	  
 	
-	public  MapManager (JPanel mapPanel){
+	public  MapManager (JPanel mapPanel, GamePanel gamePanel){
 		this.mapPanel = mapPanel;
+		this.gamePanel = gamePanel;
 		mapGrid[0][0] = new StoryPiece(true,"hi");
 		mapGrid[0][1] = new StoryPiece(false,"hi");
 		mapGrid[0][2] = new StoryPiece(false,"hi");
@@ -102,6 +103,8 @@ public class MapManager  implements ActionListener  {
 		mapGrid[column] [row].leaving();
 		column = column - 1;
 		mapGrid[column] [row].visit();
+		gamePanel.hideMap();
+		
 		System.out.println("i moved north");
 	}
 	
