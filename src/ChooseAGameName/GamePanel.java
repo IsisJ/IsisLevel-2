@@ -26,7 +26,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	int storyState = 1;
 	int mapState = 2;
 	int currentState = storyState;
-	//StoryPiece storyPiece = new StoryPiece(false, "Hey");
 	JPanel mapPanel = new JPanel();
 	MapManager mapManager = new MapManager(mapPanel);
 	JPanel compassPanel = new JPanel();
@@ -90,19 +89,18 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
-		System.out.println(buttonPressed);
 			if (buttonPressed == mapButton) {
-			if (currentState == mapState) {
-				this.hideMap();
-				this.ShowStory();
-				currentState = storyState;
+				if (currentState == mapState) {
+					this.hideMap();
+					this.ShowStory();
+					currentState = storyState;
+				}
+				else if (currentState == storyState) {
+					this.hideStory();
+					this.ShowMap();
+					currentState=mapState;
+				}
 			}
-			else if (currentState == storyState) {
-				this.hideStory();
-				this.ShowMap();
-				currentState=mapState;
-			}
-		}
 		
 	}
 

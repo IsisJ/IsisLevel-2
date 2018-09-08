@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
-public class MapManager implements ActionListener {
+public class MapManager  implements ActionListener  {
 
 	  StoryPiece[][] mapGrid= new StoryPiece[4][4];
 	  //StoryPiece storyPiece = new StoryPiece;
@@ -123,13 +123,5 @@ public class MapManager implements ActionListener {
 		System.out.println("i moved west");
 
 	}
-
-	
-	
-	
 	
 }
-	
-	
-	
-

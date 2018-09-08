@@ -20,7 +20,7 @@ public class StoryPiece {
 	private String story;
 	private boolean isDanger;
 	private boolean hasBeenThere;
-	JPanel panel;
+	//JPanel panel;
 
 	public StoryPiece(boolean isDanger, String story) {
 		this.isDanger = isDanger;
