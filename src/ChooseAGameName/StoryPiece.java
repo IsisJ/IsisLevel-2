@@ -20,6 +20,7 @@ public class StoryPiece {
 	private String story;
 	private boolean isDanger;
 	private boolean hasBeenThere;
+	//JPanel panel;
 
 	public StoryPiece(boolean isDanger, String story) {
 		this.isDanger = isDanger;
@@ -60,11 +61,19 @@ public class StoryPiece {
 			return false;
 		}
 		int deathRoll = new Random().nextInt(5) + 1;
-		if (isDanger) {
-			if (deathRoll <= 3) {
-				return false;
-			}
+		if (isDanger && deathRoll <= 3) {
+			return false;
 		}
 		return true;
 	}
+	
+	public int deathCount() {
+		int deathCounter = 0;
+		if(isDead()) {
+			deathCounter = deathCounter+1;
+		}
+		return deathCounter;
+		
+	}
+	
 }
