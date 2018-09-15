@@ -104,25 +104,31 @@ public class MapManager  implements ActionListener  {
 		column = column - 1;
 		mapGrid[column] [row].visit();
 		gamePanel.hideMap();
-		
+		gamePanel.ShowStory();
 		System.out.println("i moved north");
 	}
 	
 	private void moveEast() {
 		mapGrid[column] [row].leaving();
 		mapGrid[column] [row = row +1].visit();
+		gamePanel.hideMap();
+		gamePanel.ShowStory();
 		System.out.println("i moved east");
 	}
 	
 	private void moveSouth() {
 		mapGrid[column] [row].leaving();
 		mapGrid[column = column + 1] [row].visit();
+		gamePanel.hideMap();
+		gamePanel.ShowStory();
 		System.out.println("i moved south");
 	}
 	
 	private void moveWest() {
 		mapGrid[column] [row].leaving();
 		mapGrid[column] [row = row - 1].visit();
+		gamePanel.hideMap();
+		gamePanel.ShowStory();
 		System.out.println("i moved west");
 
 	}

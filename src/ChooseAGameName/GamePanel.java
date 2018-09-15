@@ -96,12 +96,10 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (currentState == mapState) {
 					this.hideMap();
 					this.ShowStory();
-					currentState = storyState;
 				}
 				else if (currentState == storyState) {
 					this.hideStory();
 					this.ShowMap();
-					currentState=mapState;
 				}
 			}
 		
@@ -118,13 +116,16 @@ public class GamePanel extends JPanel implements ActionListener {
 		mapManager.southButton.setVisible(true);
 		mapManager.westButton.setVisible(true);
 		compassPanel.setVisible(true);
+		currentState=mapState;
 	}
 
 
 	public void ShowStory() {
 		storyArea.setVisible(true);
 		deathCount.setVisible(true);
+		mapButton.setText("Map");
 		scroll.setVisible(true);
+		currentState = storyState;
 	}
 
 	public void hideMap() {
@@ -141,6 +142,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void hideStory() {
 		storyArea.setVisible(false);
 		deathCount.setVisible(false);
+		mapButton.setText("Story");
 		scroll.setVisible(false);
 
 	}
