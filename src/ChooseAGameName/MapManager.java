@@ -83,6 +83,7 @@ public class MapManager  implements ActionListener  {
 		if (buttonPressed == northButton) {
 			moveNorth();
 			drawMap();
+			gamePanel.addText();
 		}
 		if (buttonPressed == eastButton) {
 			moveEast();
@@ -101,8 +102,13 @@ public class MapManager  implements ActionListener  {
 	
 	private void moveNorth() {
 		mapGrid[column] [row].leaving();
-		column = column - 1;
-		mapGrid[column] [row].visit();
+		StoryPiece newLocation = mapGrid[column = column - 1] [row];
+		newLocation.visit();
+		boolean amIDead = newLocation.isDead();
+		if (amIDead) {
+			
+			//System.out.println(" I am Dead!");
+		}
 		gamePanel.hideMap();
 		gamePanel.ShowStory();
 		System.out.println("i moved north");
@@ -118,7 +124,12 @@ public class MapManager  implements ActionListener  {
 	
 	private void moveSouth() {
 		mapGrid[column] [row].leaving();
-		mapGrid[column = column + 1] [row].visit();
+		StoryPiece newLocation = mapGrid[column = column + 1] [row];
+		newLocation.visit();
+		boolean amIDead = newLocation.isDead();
+		if (amIDead) {
+			//System.out.println(" I am Dead!");
+		}
 		gamePanel.hideMap();
 		gamePanel.ShowStory();
 		System.out.println("i moved south");

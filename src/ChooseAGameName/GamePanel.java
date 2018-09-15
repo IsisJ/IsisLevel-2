@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-	// JTextArea storyArea = new JTextArea("hey", 1, 1);
+	// JTextArea storyArea = new JTextArea("", 1, 1);
 	JTextArea storyArea = new JTextArea(
 			">Hello, how are you doing today?!\n\n\n\n\n\n\n\nsome text\n\n\n\n\n\n\n\n even more text", 20, 30);
 	StoryPiece storyPiece = new StoryPiece(false, "hey");
@@ -44,18 +44,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(mapButton);
 		mapButton.setText("Map");
 		mapButton.addActionListener(this);	
-		/*
-		Story Piece Test
-		this.add(storyPiece.getSymbol());
-		this.add(storyPiece2.getSymbol());
-		End of Piece Test
-		isDead Test
-		*/
-		/*
-		System.out.println(storyPiece.isDead());
-		System.out.println(storyPiece2.isDead());
-		End of isDead
-		*/
 		this.add(mapPanel);
 		mapPanel.setVisible(false);
 		mapPanel.setPreferredSize(new Dimension (300,300));
@@ -145,6 +133,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		mapButton.setText("Story");
 		scroll.setVisible(false);
 
+	}
+	
+	public void addText() {
+		storyArea.append("{new text}");
+		//storyArea.getText();
+		
 	}
 
 }
