@@ -17,10 +17,10 @@ public class StoryPiece {
 	private String alreadyBeenThereSymbol = "-";
 	private String occupiedSymbol = "^";
 	private JComponent symbol;
-	private String story;
+	public  String story;
 	private boolean isDanger;
 	private boolean hasBeenThere;
-	//JPanel panel;
+
 
 	public StoryPiece(boolean isDanger, String story) {
 		this.isDanger = isDanger;
@@ -37,6 +37,7 @@ public class StoryPiece {
 		isOccupied = true;
 		symbol = new JLabel(occupiedSymbol);
 	}
+	
 	
 	public void leaving(){
 		isOccupied = false;
@@ -74,6 +75,10 @@ public class StoryPiece {
 		}
 		return deathCounter;
 		
+	}
+
+	public String getStory() {
+		return story;
 	}
 	
 }

@@ -135,10 +135,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	}
 	
-	public void addText() {
-		storyArea.append("{new text}");
+	public void addText(String story) {
+		storyArea.append(story);
+
 		//storyArea.getText();
-		
 	}
 
 }
