@@ -13,23 +13,25 @@ public class StoryPiece {
 
 	private boolean isOccupied;
 	private String dangerSymbol = "x";
-	private String memorySymbol = "o";
+	private String memoryAndStorySymbol = "o";
 	private String alreadyBeenThereSymbol = "-";
 	private String occupiedSymbol = "^";
 	private JComponent symbol;
 	public  String story;
 	private boolean isDanger;
 	private boolean hasBeenThere;
+	private String deathStory;
 
 
-	public StoryPiece(boolean isDanger, String story) {
+	public StoryPiece(boolean isDanger, String story, String deathStory) {
 		this.isDanger = isDanger;
 		hasBeenThere = false;
 		this.story = story;
+		this.deathStory = deathStory;
 		if (isDanger) {
 			symbol = new JLabel(dangerSymbol);
 		} else {
-			symbol = new JLabel(memorySymbol);
+			symbol = new JLabel(memoryAndStorySymbol);
 		}
 	}
 
@@ -43,6 +45,10 @@ public class StoryPiece {
 		isOccupied = false;
 		symbol = new JLabel(alreadyBeenThereSymbol);
 		hasBeenThere = true;
+	}
+	
+	public boolean getHasBeenThere() {
+		return hasBeenThere;
 	}
 	
 	public boolean getOccupied() {
@@ -80,5 +86,9 @@ public class StoryPiece {
 	public String getStory() {
 		return story;
 	}
+	public String getDeathStory() {
+		return deathStory;
+	}
+
 	
 }

@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	// JTextArea storyArea = new JTextArea("", 1, 1);
 	JTextArea storyArea = new JTextArea(
 			">Hello, how are you doing today?!\n\n\n\n\n\n\n\nsome text\n\n\n\n\n\n\n\n even more text", 20, 30);
-	StoryPiece storyPiece = new StoryPiece(false, "hey");
+	StoryPiece storyPiece = new StoryPiece(false, "hey", "");
 	JLabel deathCount = new JLabel("Deaths: "+storyPiece.deathCount());
 	JScrollPane scroll = new JScrollPane(storyArea);
 	JButton mapButton = new JButton();
@@ -137,8 +137,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public void addText(String story) {
 		storyArea.append(story);
-
-		//storyArea.getText();
 	}
 
 }

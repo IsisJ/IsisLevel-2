@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 public class MapManager implements ActionListener {
 
 	StoryPiece[][] mapGrid = new StoryPiece[4][4];
-	// StoryPiece storyPiece = new StoryPiece;
 
 	JButton northButton = new JButton("N");
 	JButton eastButton = new JButton("E");
@@ -27,22 +26,22 @@ public class MapManager implements ActionListener {
 	public MapManager(JPanel mapPanel, GamePanel gamePanel) {
 		this.mapPanel = mapPanel;
 		this.gamePanel = gamePanel;
-		mapGrid[0][0] = new StoryPiece(true, "hi");
-		mapGrid[0][1] = new StoryPiece(false, "hi");
-		mapGrid[0][2] = new StoryPiece(false, "hi");
-		mapGrid[0][3] = new StoryPiece(true, "hi");
-		mapGrid[1][0] = new StoryPiece(false, "hi");
-		mapGrid[1][1] = new StoryPiece(true, "hi");
-		mapGrid[1][2] = new StoryPiece(true, "hi");
-		mapGrid[1][3] = new StoryPiece(false, "hi");
-		mapGrid[2][0] = new StoryPiece(true, "hi");
-		mapGrid[2][1] = new StoryPiece(true, "hi");
-		mapGrid[2][2] = new StoryPiece(false, "hi");
-		mapGrid[2][3] = new StoryPiece(false, "hi");
-		mapGrid[3][0] = new StoryPiece(false, "hi");
-		mapGrid[3][1] = new StoryPiece(false, "hi");
-		mapGrid[3][2] = new StoryPiece(false, "hi");
-		mapGrid[3][3] = new StoryPiece(false, "hi");
+		mapGrid[0][0] = new StoryPiece(true, "\n0,0", "you died");
+		mapGrid[0][1] = new StoryPiece(false, "\n0,1", null);
+		mapGrid[0][2] = new StoryPiece(false, "\n0,2", null);
+		mapGrid[0][3] = new StoryPiece(true, "\n0,3", "you died");
+		mapGrid[1][0] = new StoryPiece(false, "\n1,0", null);
+		mapGrid[1][1] = new StoryPiece(true, "\n1,1", "you died");
+		mapGrid[1][2] = new StoryPiece(true, "\n1.2", "you died");
+		mapGrid[1][3] = new StoryPiece(false, "\n1,3", null);
+		mapGrid[2][0] = new StoryPiece(true, "\n2,0", "you died");
+		mapGrid[2][1] = new StoryPiece(true, "\n2,1", "you died");
+		mapGrid[2][2] = new StoryPiece(false, "\n2,2", null);
+		mapGrid[2][3] = new StoryPiece(false, "\n2,3", null);
+		mapGrid[3][0] = new StoryPiece(false, "\n3,0", null);
+		mapGrid[3][1] = new StoryPiece(false, "\n3,1", null);
+		mapGrid[3][2] = new StoryPiece(false, "\n3,2", null);
+		mapGrid[3][3] = new StoryPiece(false, "\n3,3", null);
 		mapGrid[column][row].visit();
 
 		this.addCompassActionListeners();
@@ -80,6 +79,7 @@ public class MapManager implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed == northButton) {
 			if (column >= 1) {
+
 				moveNorth();
 				drawMap();
 			} else {
@@ -114,52 +114,54 @@ public class MapManager implements ActionListener {
 
 	}
 
-	// after we visit create a method to retrieve the story
-	// update game panel to show that story
+	private void displayStory(StoryPiece newLocation) {
+		newLocation.visit();
+		if (!newLocation.getHasBeenThere()) {
+			boolean amIDead = newLocation.isDead();
+			if (!amIDead) {
+				String story = newLocation.getStory();
+				gamePanel.addText(story);
+			} else if (amIDead) {
+				String deathStory = newLocation.getDeathStory();
+				gamePanel.addText(deathStory);
+			}
+		}
+	}
+
+	private void showMapOrStoryPage(StoryPiece newLocation) {
+		if (!newLocation.getHasBeenThere()) {
+			gamePanel.hideMap();
+			gamePanel.ShowStory();
+		}
+
+	}
+
 	private void moveNorth() {
 		mapGrid[column][row].leaving();
 		StoryPiece newLocation = mapGrid[column = column - 1][row];
-		newLocation.visit();
-		String story = newLocation.getStory();
-		gamePanel.addText(story);
-		boolean amIDead = newLocation.isDead();
-		if (amIDead) {
-			// show dead part of story
-			// System.out.println(" I am Dead!");
-		}
-		gamePanel.hideMap();
-		gamePanel.ShowStory();
-		System.out.println("i moved north");
+		displayStory(newLocation);
+		showMapOrStoryPage(newLocation);
 	}
 
 	private void moveEast() {
 		mapGrid[column][row].leaving();
-		mapGrid[column][row = row + 1].visit();
-		gamePanel.hideMap();
-		gamePanel.ShowStory();
-		System.out.println("i moved east");
+		StoryPiece newLocation = mapGrid[column][row = row + 1];
+		displayStory(newLocation);
+		showMapOrStoryPage(newLocation);
 	}
 
 	private void moveSouth() {
 		mapGrid[column][row].leaving();
 		StoryPiece newLocation = mapGrid[column = column + 1][row];
-		newLocation.visit();
-		boolean amIDead = newLocation.isDead();
-		if (amIDead) {
-			// System.out.println(" I am Dead!");
-		}
-		gamePanel.hideMap();
-		gamePanel.ShowStory();
-		System.out.println("i moved south");
+		displayStory(newLocation);
+		showMapOrStoryPage(newLocation);
 	}
 
 	private void moveWest() {
 		mapGrid[column][row].leaving();
-		mapGrid[column][row = row - 1].visit();
-		gamePanel.hideMap();
-		gamePanel.ShowStory();
-		System.out.println("i moved west");
-
+		StoryPiece newLocation = mapGrid[column][row = row - 1];
+		displayStory(newLocation);
+		showMapOrStoryPage(newLocation);
 	}
 
 }
