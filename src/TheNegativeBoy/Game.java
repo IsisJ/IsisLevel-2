@@ -1,4 +1,4 @@
-package ChooseAGameName;
+package TheNegativeBoy;
 
 import java.awt.Color;
 

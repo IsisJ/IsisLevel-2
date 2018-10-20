@@ -1,4 +1,4 @@
-package ChooseAGameName;
+package TheNegativeBoy;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,7 +16,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	// JTextArea storyArea = new JTextArea("", 1, 1);
 	JTextArea storyArea = new JTextArea(
-			">Hello, how are you doing today?!\n\n\n\n\n\n\n\nsome text\n\n\n\n\n\n\n\n even more text", 20, 30);
+			"> An alarm goes off. You sit up in your bed with a nasty headache. The house is oddly quiet as you walk throught he hallway to the kitchen. Taped to the front of the fridge is a long list of chores signed 'Love, Mom xoxo'", 20, 30);
 	StoryPiece storyPiece = new StoryPiece(false, "hey", "");
 	JLabel deathCount = new JLabel("Deaths: "+storyPiece.deathCount());
 	JScrollPane scroll = new JScrollPane(storyArea);
