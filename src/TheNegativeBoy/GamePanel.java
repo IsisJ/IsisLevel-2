@@ -14,11 +14,11 @@ import javax.swing.JTextArea;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-	// JTextArea storyArea = new JTextArea("", 1, 1);
+
 	JTextArea storyArea = new JTextArea(
 			"> An alarm goes off. You sit up in your bed with a nasty headache. The house is oddly quiet as you walk throught he hallway to the kitchen. Taped to the front of the fridge is a long list of chores signed 'Love, Mom xoxo'", 20, 30);
 	StoryPiece storyPiece = new StoryPiece(false, "hey", "");
-	JLabel deathCount = new JLabel("Deaths: "+storyPiece.deathCount());
+	JLabel deathCount = new JLabel("Deaths: 0");
 	JScrollPane scroll = new JScrollPane(storyArea);
 	JButton mapButton = new JButton();
 	JLabel map = new JLabel("You're in the map");
@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	int mapState = 2;
 	int currentState = storyState;
 	JPanel mapPanel = new JPanel();
-	MapManager mapManager;
 	JPanel compassPanel = new JPanel();
+	MapManager mapManager;
 
 	public GamePanel () {
 		this.mapManager = new MapManager(mapPanel, this);
@@ -55,8 +55,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.mapManager.drawMap();
 
 	}
-	
-	
 	
 	public void compassPage(){
 		JLabel empty = new JLabel("  ");
@@ -105,8 +103,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		mapManager.westButton.setVisible(true);
 		compassPanel.setVisible(true);
 		currentState=mapState;
+		
 	}
-
 
 	public void ShowStory() {
 		storyArea.setVisible(true);
@@ -114,6 +112,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		mapButton.setText("Map");
 		scroll.setVisible(true);
 		currentState = storyState;
+		deathCount.setText("Deaths: " + mapManager.getDeathCount());
 	}
 
 	public void hideMap() {
@@ -136,7 +135,11 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	public void addText(String story) {
-		storyArea.append(story);
+		//storyArea.append(story);
+		String getText = storyArea.getText();
+		getText = story + "\n" + "\n" + getText;
+		storyArea.setText(getText);
+		storyArea.setCaretPosition(0);
 	}
 
 }

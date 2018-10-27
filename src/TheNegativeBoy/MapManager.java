@@ -22,6 +22,8 @@ public class MapManager implements ActionListener {
 	GamePanel gamePanel;
 	int column = 2;
 	int row = 2;
+	private int deathCounter = 0;
+
 
 	public MapManager(JPanel mapPanel, GamePanel gamePanel) {
 		this.mapPanel = mapPanel;
@@ -49,7 +51,7 @@ public class MapManager implements ActionListener {
 				"\n> Syrians go off as kids scramble. A neighbor must’ve called the cops ", null);
 		mapGrid[2][0] = new StoryPiece(true,
 				"\n> As you turn the corner you see a single house with bright lights spilling from the windows and loud music that greets the dead of night",
-				"you died");
+				"\nYOU DIED");
 		mapGrid[2][1] = new StoryPiece(true,
 				"\n>  Later that day a note was slipped under the front door of the house. It appears to be an invitation to a birthday party later tonight.",
 				"\n> An odd beeping sound begins to go off. Slightly confused, you look around until you find the culprit. The invitation. The sound reminds you of a timer on an explosive. Before you can’t do or think anything the invite explodes and takes you out with it. \nYOU DIED ");
@@ -153,6 +155,7 @@ public class MapManager implements ActionListener {
 			} else if (amIDead) {
 				String deathStory = newLocation.getDeathStory();
 				gamePanel.addText(deathStory);
+				deathCounter = deathCounter + 1;
 			}
 		}
 	
@@ -214,5 +217,11 @@ public class MapManager implements ActionListener {
 		displayStory(newLocation);
 		showMapOrStoryPage(newLocation);
 	}
+	
+	public int getDeathCount() {
+		return deathCounter;
+	}
+	
+
 
 }

@@ -1,13 +1,10 @@
 package TheNegativeBoy;
 
-import java.awt.Color;
 import java.util.Random;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import org.jointheleague.leagueinvaders.GamePanel;
 
 public class StoryPiece {
 
@@ -74,14 +71,6 @@ public class StoryPiece {
 		return true;
 	}
 	
-	public int deathCount() {
-		int deathCounter = 0;
-		if(isDead()) {
-			deathCounter = deathCounter+1;
-		}
-		return deathCounter;
-		
-	}
 
 	public String getStory() {
 		return story;
