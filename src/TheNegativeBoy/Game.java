@@ -1,4 +1,4 @@
-package ChooseAGameName;
+package TheNegativeBoy;
 
 import java.awt.Color;
 
@@ -7,16 +7,12 @@ import javax.swing.JFrame;
 public class Game {
 	
 	GamePanel panel = new GamePanel();
-	//GamePanel mapPanel = new GamePanel();
-
 	
 	public void CreateGameUI(){
 
 		JFrame frame = new JFrame();
 		frame.add(panel);
-		//frame.add(mapPanel);
 		panel.gamePage();
-		//mapPanel.mapPage();
 		panel.setBackground(Color.white);
 		frame.setSize(500, 500);
 		frame.setVisible(true);

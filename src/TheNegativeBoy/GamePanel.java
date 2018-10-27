@@ -1,4 +1,4 @@
-package ChooseAGameName;
+package TheNegativeBoy;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,11 +14,11 @@ import javax.swing.JTextArea;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-	// JTextArea storyArea = new JTextArea("hey", 1, 1);
+
 	JTextArea storyArea = new JTextArea(
-			">Hello, how are you doing today?!\n\n\n\n\n\n\n\nsome text\n\n\n\n\n\n\n\n even more text", 20, 30);
-	StoryPiece storyPiece = new StoryPiece(false, "hey");
-	JLabel deathCount = new JLabel("Deaths: "+storyPiece.deathCount());
+			"> An alarm goes off. You sit up in your bed with a nasty headache. The house is oddly quiet as you walk throught he hallway to the kitchen. Taped to the front of the fridge is a long list of chores signed 'Love, Mom xoxo'", 20, 30);
+	StoryPiece storyPiece = new StoryPiece(false, "hey", "");
+	JLabel deathCount = new JLabel("Deaths: 0");
 	JScrollPane scroll = new JScrollPane(storyArea);
 	JButton mapButton = new JButton();
 	JLabel map = new JLabel("You're in the map");
@@ -27,9 +27,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	int mapState = 2;
 	int currentState = storyState;
 	JPanel mapPanel = new JPanel();
-	MapManager mapManager = new MapManager(mapPanel);
 	JPanel compassPanel = new JPanel();
+	MapManager mapManager;
 
+	public GamePanel () {
+		this.mapManager = new MapManager(mapPanel, this);
+	}
 
 	public void gamePage() {
 		storyArea.setEditable(false);
@@ -41,18 +44,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.add(mapButton);
 		mapButton.setText("Map");
 		mapButton.addActionListener(this);	
-		/*
-		Story Piece Test
-		this.add(storyPiece.getSymbol());
-		this.add(storyPiece2.getSymbol());
-		End of Piece Test
-		isDead Test
-		*/
-		/*
-		System.out.println(storyPiece.isDead());
-		System.out.println(storyPiece2.isDead());
-		End of isDead
-		*/
 		this.add(mapPanel);
 		mapPanel.setVisible(false);
 		mapPanel.setPreferredSize(new Dimension (300,300));
@@ -64,8 +55,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.mapManager.drawMap();
 
 	}
-	
-	
 	
 	public void compassPage(){
 		JLabel empty = new JLabel("  ");
@@ -93,12 +82,10 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (currentState == mapState) {
 					this.hideMap();
 					this.ShowStory();
-					currentState = storyState;
 				}
 				else if (currentState == storyState) {
 					this.hideStory();
 					this.ShowMap();
-					currentState=mapState;
 				}
 			}
 		
@@ -115,13 +102,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		mapManager.southButton.setVisible(true);
 		mapManager.westButton.setVisible(true);
 		compassPanel.setVisible(true);
+		currentState=mapState;
+		
 	}
-
 
 	public void ShowStory() {
 		storyArea.setVisible(true);
 		deathCount.setVisible(true);
+		mapButton.setText("Map");
 		scroll.setVisible(true);
+		currentState = storyState;
+		deathCount.setText("Deaths: " + mapManager.getDeathCount());
 	}
 
 	public void hideMap() {
@@ -138,8 +129,17 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void hideStory() {
 		storyArea.setVisible(false);
 		deathCount.setVisible(false);
+		mapButton.setText("Story");
 		scroll.setVisible(false);
 
+	}
+	
+	public void addText(String story) {
+		//storyArea.append(story);
+		String getText = storyArea.getText();
+		getText = story + "\n" + "\n" + getText;
+		storyArea.setText(getText);
+		storyArea.setCaretPosition(0);
 	}
 
 }
